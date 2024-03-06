@@ -7,7 +7,10 @@ import mongoose from "mongoose";
 
 const carSchema = new mongoose.Schema({
     // campo --> tipo de dato
-    plate: String,
+    plate: {
+        type: String,
+        require: true,
+    },
     model: String,
     brand: String,
     version: String,
