@@ -17,6 +17,10 @@ const carSchema = new mongoose.Schema({
     color: String,
     type: String,
     vin: String,
+    isDeleted: {
+        type: Boolean,
+        default: false,
+    },
 });
 
 // Nota: El nombre que le vamos a dar al modelo debe ser primera letra en Mayuscula y en singular
