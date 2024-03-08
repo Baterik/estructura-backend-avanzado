@@ -10,8 +10,14 @@ const createCar = async (req, res) => {
         // plate: '123-ABC',
         // vin: '981UY29E8USH129',
         // version: 'GSR 200'
-    const newCar = await Car.create(req.body);
+
+    try{
+        const newCar = await Car.create(req.body);
     res.json(newCar);
+    } catch (error){
+        res.json({
+            msg: 'Error al crear car', error});
+    }    
 };
 
 // Read
