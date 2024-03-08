@@ -15,7 +15,53 @@ const createCar = async (req, res) => {
 };
 
 // Read
+//Get all cars
+const getAllCars = async (req, res) => {
+    const cars = await Car.find({
+        isDeleted: false,
+    });
+    res.json(cars);
+}
+//Get bar by id
+const getCarById = async (req, res) => {    
+    const car = await Car.findById(req.params.carId)
+    res.json(car);
+};
+
 // Update
+const updateCar = async (req, res) => {
+    const { carId } = req.params;
+    //1. El primer filtro, 2. nuevos campos
+    const updatedCar = await Car.updateOne(
+        {
+        _id: carId
+        },
+        req.body);
+        res.json(updatedCar);
+
+    // const newCar = await Car.findByIdAndUpdate(req.params.carId, req.body)
+};
 // Delete
 
-export {createCar};
+const deleteCar = async (req, res) => {
+    // const deletedCar = await Car.findByIdAndDelete(req.params.carId);
+    // res.json(deletedCar);
+
+    //Busque un carro por su Id y cambie el campo isDeleted a true
+    const deletedCar = await Car.findByIdAndUpdate(
+        //Id a buscar
+        req.params.carId, 
+        
+        //Objeto nuevo
+        {
+            isDeleted: true,
+        },
+
+        //Opciones para que muestre el objeto despues del borrado
+        {
+            new: true,
+        });
+        res.json(deletedCar);
+}
+
+export { createCar, getAllCars, getCarById, updateCar, deleteCar };
