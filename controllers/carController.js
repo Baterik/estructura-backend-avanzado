@@ -15,8 +15,10 @@ const createCar = async (req, res) => {
         const newCar = await Car.create(req.body);
     res.json(newCar);
     } catch (error){
-        res.json({
-            msg: 'Error al crear car', error});
+        res.status(500).json({
+            msg: 'Error al crear car',
+            error,
+        });
     }    
 };
 
@@ -27,10 +29,10 @@ const getAllCars = async (req, res) => {
         isDeleted: false,
     });
     res.json(cars);
-}
+};
 //Get bar by id
 const getCarById = async (req, res) => {    
-    const car = await Car.findById(req.params.carId)
+    const car = await Car.findById(req.params.carId);
     res.json(car);
 };
 
@@ -40,7 +42,7 @@ const updateCar = async (req, res) => {
     //1. El primer filtro, 2. nuevos campos
     const updatedCar = await Car.updateOne(
         {
-        _id: carId
+        _id: carId,
         },
         req.body);
         res.json(updatedCar);
