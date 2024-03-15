@@ -1,5 +1,5 @@
 import express from 'express';
-import {createBook} from '../controllers/bookController.js';
+import {createBook, getBookById, getAllBooks} from '../controllers/bookController.js';
 
 
 const bookRoutes = express.Router();
@@ -8,5 +8,9 @@ const bookRoutes = express.Router();
 bookRoutes.post('/', createBook);
 
 //*ToDo: get book by id
+bookRoutes.get('/:bookId', getBookById);
+
+//ToDo get all books
+bookRoutes.get('/', getAllBooks)
 
 export default bookRoutes;
